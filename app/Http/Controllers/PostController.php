@@ -4,12 +4,20 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Repositories\PostRepository;
 
 class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+
+    public $postRepository;
+
+    public function __construct(PostRepository $postRepository){
+        $this->postRepository = $postRepository;
+    }
+
     public function index()
     {
         $posts = Post::with('category')->get();
